@@ -1,22 +1,25 @@
 import { createRoot } from "react-dom/client"
 import "./styles.css"
-import { App } from './App';
+import { StoryboardEditPage } from './pages/StoryboardEditPage';
 
 import * as React from 'react';
 import { red} from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {App} from "./App";
 
-const theme = createTheme({
+const darkTheme = createTheme({
     palette: {
-        dark: '000',
-        primary: {
-            main: red[500],
-        },
+        mode: 'dark',
+        // divider: 'rgba(255,255,255,0.25)',
+        text: {
+            primary: 'rgba(255,255,255,1)',
+            secondary: 'rgba(255,255,255,0.75)',
+        }
     },
 });
 
 createRoot(document.getElementById("root")).render(
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
         <App/>
     </ThemeProvider>
 )
