@@ -1,12 +1,30 @@
 import {Box, Paper, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
 
-const StoryPreview = () => (
+const StoryPreview = ({i}) => (
     <Paper
         sx={{
+            overflow:'hidden',
             width: '33vw',
             aspectRatio: '16/9',
-            backgroundColor: 'grey.800', flexShrink: 0}}>
+            backgroundColor: 'grey.800', flexShrink: 0,
+        }}>
+        <img style={{objectFit: 'cover', height: '100%', aspectRatio: '16/9', objectPosition:'top'}} src={`/scene${i}.png`}/>
+    </Paper>
+)
+const CreateNewStory = () => (
+    <Paper
+        sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '33vw',
+            aspectRatio: '16/9',
+            backgroundColor: 'grey.800', flexShrink: 0
+        }}
+    >
+        <AddIcon color="grey.900"/>
     </Paper>
 )
 
@@ -16,17 +34,25 @@ const Heading = ({children}) => (
     </Typography>
 )
 
+const items = [1,2,3];
+
 export const StoryboardOverview = () => {
     return (
         <Box sx={{display: 'flex', gap: 6, p: 6, height: 'calc(100vh - 60px)', alignItems: 'center', overflow: 'scroll'}}>
-            {[1,2,3,4,5].map(i => (
+            {items.map(i => (
                 <Link style={{textDecoration: 'none'}} to={`/edit/${i}`}>
                     <Box key={i} sx={{display: 'flex', flexDirection: 'column', gap: 3}}>
-                        <Heading>Scene {i}</Heading>
-                        <StoryPreview />
+                        <Heading>Shot {i}</Heading>
+                        <StoryPreview i={i}/>
                     </Box>
                 </Link>
             ))}
+            <Link style={{textDecoration: 'none'}} to={`/edit/${items.length + 1}`}>
+                <Box sx={{display: 'flex', flexDirection: 'column', gap: 3}}>
+                    <Heading>New Shot</Heading>
+                    <CreateNewStory />
+                </Box>
+            </Link>
         </Box>
     )
 }
