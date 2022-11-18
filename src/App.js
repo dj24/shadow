@@ -4,6 +4,7 @@ import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
 import {Box, Divider, Paper} from "@mui/material";
 import {Home} from "./pages/Home";
 import {CreateModal} from "./components/CreateModal";
+import {StoryboardOverview} from "./pages/StoryboardOverview";
 
 
 export const App = () => (
@@ -19,7 +20,10 @@ export const App = () => (
                     <Home/>
                     <CreateModal/>
                 </Route>
-                <Route exact path="/edit">
+                <Route exact path="/storyboard">
+                    <StoryboardOverview />
+                </Route>
+                <Route exact path="/edit/:id">
                     <StoryboardEditPage />
                 </Route>
             </Router>

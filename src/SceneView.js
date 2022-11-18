@@ -45,7 +45,7 @@ export default function SceneView() {
             <planeBufferGeometry args={[10, 10, 1, 1]} />
             <shadowMaterial transparent opacity={0.2} />
           </mesh>
-            <Environment preset="dawn" background blur={0.5} />
+            <Environment preset="park" background blur={0.33} />
         </Canvas>
       )
 }
