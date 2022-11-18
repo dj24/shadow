@@ -3,8 +3,8 @@ import { useGLTF, useTexture, useAnimations } from "@react-three/drei"
 import { a, useSpring } from "@react-spring/three"
 
 export default function Model(props) {
-  const { nodes, animations } = useGLTF("/stacy.glb")
-  const texture = useTexture("/stacy.jpg")
+  const { nodes, animations } = useGLTF(`${process.env.PUBLIC_URL}/stacy.glb`)
+  const texture = useTexture(`${process.env.PUBLIC_URL}/stacy.jpg`)
   const { ref, actions, names } = useAnimations(animations)
   const [hovered, setHovered] = useState(false)
   const [index, setIndex] = useState(4)
