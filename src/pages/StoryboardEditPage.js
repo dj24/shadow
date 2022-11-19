@@ -103,21 +103,38 @@ export const StoryboardEditPage = () => {
                     <Paper square elevation={0} sx={{display: 'flex', alignItems: 'center', height: 'calc(100vh - 121px)', flexDirection: 'column', gap: 3, p: 3 }}>
                         <Box sx={{flex:1, display: 'flex', justifyContent: 'space-between', gap: 3, alignSelf: 'stretch', alignItems: 'start'}}>
                             <ExtraControls/>
-                            <Paper sx={{aspectRatio: '16/9', flex:1, overflow:'hidden'}}>
+                            <Paper sx={{aspectRatio: '16/9', flex:1, overflow:'hidden', position:'relative'}}>
                                 <Canvas/>
+                                <FormControl sx={{position: 'absolute', bottom: 16, left: 16, width: 160}}>
+                                    <InputLabel id="label-aspect">Aspect Ratio</InputLabel>
+                                    <Select defaultValue={0} label="Category">
+                                        <MenuItem value={0}>1.85:1</MenuItem>
+                                        <MenuItem value={1}>2.39:1</MenuItem>
+                                        <MenuItem value={2}>1.3:1</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Paper>
                         </Box>
 
                         <Box sx={{display: 'flex', gap:3, alignSelf: 'stretch', marginLeft: 9}}>
-                            <TextField
-                                sx={{ flex:'1'}}
-                                label="Notes"
-                                multiline
-                                rows={4}
-                                defaultValue="Example Notes"
-                                variant="outlined"
-                            />
-                            <References/>
+                            <FormControl sx={{ flex:'1'}}>
+                                <Typography sx={{mb: 1.5}}>
+                                    Notes
+                                </Typography>
+                                <TextField
+                                    multiline
+                                    rows={4}
+                                    defaultValue="Example Notes"
+                                    variant="outlined"
+                                />
+                            </FormControl>
+                            <FormControl>
+                                <Typography sx={{mb: 1.5}}>
+                                    References
+                                </Typography>
+                                <References/>
+                            </FormControl>
+
                         </Box>
                     </Paper>
                 </Box>
