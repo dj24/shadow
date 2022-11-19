@@ -10,7 +10,7 @@ const StoryPreview = ({i}) => (
             aspectRatio: '16/9',
             backgroundColor: 'grey.800', flexShrink: 0,
         }}>
-        <img style={{objectFit: 'cover', height: '100%', aspectRatio: '16/9', objectPosition:'top'}} src={`${process.env.PUBLIC_URL}/scene${i}.png`}/>
+        <img style={{objectFit: 'cover', height: '100%', aspectRatio: '16/9', objectPosition:'top'}} src={`${process.env.PUBLIC_URL}/images/scene${i}.png`}/>
     </Paper>
 )
 const CreateNewStory = () => (

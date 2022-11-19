@@ -10,7 +10,6 @@ import {App} from "./App";
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
-        // divider: 'rgba(255,255,255,0.25)',
         text: {
             primary: 'rgba(255,255,255,1)',
             secondary: 'rgba(255,255,255,0.75)',
