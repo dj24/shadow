@@ -19,6 +19,8 @@ import { ExtraControls} from "../components/ExtraControls";
 import {Inspector} from "../components/Inspector";
 import {Comments} from "../components/Coments";
 import AddIcon from "@mui/icons-material/Add";
+import {RedLight} from "../components/RedLight";
+import {BlueLight} from "../components/BlueLight";
 
 
 const Assets = () => {
@@ -52,6 +54,8 @@ const Assets = () => {
                 <img onClick={handleThumbClick(Sofa)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/sofa_thumb.png`}/>
                 <img onClick={handleThumbClick(Table)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/table_thumb.png`}/>
                 <img onClick={handleThumbClick(Wall)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/wall_thumb.png`}/>
+                <img onClick={handleThumbClick(RedLight)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/redlight_thumb.png`}/>
+                <img onClick={handleThumbClick(BlueLight)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/bluelight_thumb.png`}/>
 
                 {[0,1,2,3,4,5,6,7,8].map(i => (
                     <Paper key={{i}} sx={{ aspectRatio: '1/1', backgroundColor: 'grey.800'}}/>
@@ -66,11 +70,11 @@ const Assets = () => {
 
 const References = () => {
     return(
-        <Paper sx={{ flex:'1', display: 'flex', gap:2, p: 2}}>
+        <Paper sx={{ flex:'1', display: 'flex', gap:2, p: 2, border: 1, borderColor: 'divider'}}>
             {[1,2,3].map(i => (
-                <img  style={{borderRadius:4, objectFit: 'cover', aspectRatio: '1/1', width: 96}} src={`${process.env.PUBLIC_URL}/images/inspo${i}.jpeg`}/>
+                <img  style={{borderRadius:4, objectFit: 'cover', aspectRatio: '1/1', width: 90}} src={`${process.env.PUBLIC_URL}/images/inspo${i}.jpeg`}/>
             ))}
-            <Paper sx={{ backgroundColor: 'grey.800', aspectRatio: '1/1', width: 96, display: 'flex', alignItems:'center', justifyContent: 'center'}}>
+            <Paper sx={{ backgroundColor: 'grey.800', aspectRatio: '1/1', width: 90, display: 'flex', alignItems:'center', justifyContent: 'center'}}>
                 <AddIcon color="grey.900"/>
             </Paper>
         </Paper>

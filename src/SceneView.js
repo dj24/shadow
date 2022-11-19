@@ -27,7 +27,7 @@ export default function SceneView() {
     const {sceneObjects, setActiveObjectIndex, activeObjectIndex, setActiveObjectMatrix, activeObjectMatrix, setActiveObjectPosition} = useContext(SceneContext);
 
     return (
-        <Canvas onPointerMissed={() => setActiveObjectIndex(undefined)}>
+        <Canvas shadow onPointerMissed={() => setActiveObjectIndex(undefined)}>
         {!isDragging && <CameraController />}
           <ambientLight />
           <directionalLight position={[-5, 5, 5]} castShadow shadow-mapSize-width={1024} shadow-mapSize-height={1024} />
@@ -63,7 +63,7 @@ export default function SceneView() {
             </Suspense>
           <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[0, -1, 0]} receiveShadow>
             <planeBufferGeometry args={[10, 10, 1, 1]} />
-          <meshStandardMaterial  color={'grey'} />
+          <meshStandardMaterial receiveShadow color={'grey'} />
             {/*<shadowMaterial transparent opacity={0.2} />*/}
           </mesh>
             <Environment preset="dawn" background blur={0.5} />

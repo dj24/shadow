@@ -9,7 +9,7 @@ export default function Sofa(props) {
 
   return (
       <group rotation={[0, 0, 0]} scale={0.03} {...props}>
-        <primitive object={nodes.RootNode} />
+        <primitive castShadow object={nodes.RootNode} />
       </group>
   )
 }

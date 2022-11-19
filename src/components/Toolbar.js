@@ -30,7 +30,7 @@ export const Toolbar = () => {
             </Box>
             <Box sx={{display: 'flex',gap: 3, alignItems: 'center'}}>
                 <Divider orientation="vertical" flexItem />
-                <a style={{textDecoration: ''}} href={dataUri} download>
+                <a style={{textDecoration: 'none'}} href={dataUri} download>
                     <Button onClick={handleDownload} sx={{display: 'flex', gap: 1}}>
                         <FileDownloadIcon/>
                         <span>Export</span>
