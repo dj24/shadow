@@ -3,7 +3,7 @@ import {
     Box,
     Divider, FormControl,
     InputLabel,
-     MenuItem, Paper, TextField,
+    MenuItem, Paper, Slider, TextField, Tooltip,
     Typography
 } from "@mui/material";
 import Select  from '@mui/material/Select';
@@ -12,7 +12,18 @@ import {useContext} from "react";
 import {SceneContext} from "../App";
 import { Box as BoxModel} from '../components/Box';
 import Stacy from "../components/Stacy";
+import Sofa from "../components/Sofa";
+import Table from "../components/Table";
 
+function ValueLabelComponent(props) {
+    const { children, value } = props;
+
+    return (
+        <Tooltip enterTouchDelay={0} placement="top" title={value}>
+            {children}
+        </Tooltip>
+    );
+}
 
 const Assets = () => {
     const {setSceneObjects} = useContext(SceneContext);
@@ -39,8 +50,12 @@ const Assets = () => {
 
             <Divider/>
             <Box sx={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3, p:3, overflowY: 'auto'}}>
+
                 <img onClick={handleThumbClick(Stacy)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/stacy_thumb.png`}/>
                 <img onClick={handleThumbClick(BoxModel)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/cube_thumb.png`}/>
+                <img onClick={handleThumbClick(Sofa)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/sofa_thumb.png`}/>
+                <img onClick={handleThumbClick(Table)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/table_thumb.png`}/>
+
                 {[0,1,2,3,4,5,6,7,8].map(i => (
                     <Paper key={{i}} sx={{ aspectRatio: '1/1', backgroundColor: 'grey.800'}}/>
                 ))}
@@ -50,7 +65,54 @@ const Assets = () => {
     )
 }
 
+const Inspector = () => {
+    const {setSceneObjects} = useContext(SceneContext);
+
+    return (
+        <Paper elevation={1} sx={{ width: '100%', maxWidth: 360, flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{display: 'flex', flexDirection: 'column'}}>
+                <Typography sx={{fontWeight: 500,fontSize: 20, px: 3, py: 2}}>
+                    Inspector
+                </Typography>
+                <Divider/>
+                <Box sx={{px: 3, py: 2, display: 'flex', flexDirection: 'column', gap: 3}}>
+                    <Typography sx={{fontWeight: 500,fontSize: 18}}>
+                        Position
+                    </Typography>
+                    {['X', 'Y', 'Z'].map(axis => (
+                        <FormControl>
+                            <Typography gutterBottom>
+                                {axis} Rotation
+                            </Typography>
+                            <Slider valueLabelDisplay="auto" slots={{
+                                valueLabel: ValueLabelComponent,
+                            }}  />
+                        </FormControl>
+                    ))}
+                </Box>
+                <Divider/>
+                <Box sx={{px: 3, py: 2, display: 'flex', flexDirection: 'column', gap: 3}}>
+                <Typography sx={{fontWeight: 500,fontSize: 18}}>
+                    Rotation
+                </Typography>
+                {['X', 'Y', 'Z'].map(axis => (
+                    <FormControl>
+                        <Typography gutterBottom>
+                            {axis} Rotation
+                        </Typography>
+                        <Slider valueLabelDisplay="auto" slots={{
+                            valueLabel: ValueLabelComponent,
+                        }}  />
+                    </FormControl>
+                ))}
+                </Box>
+            </Box>
+        </Paper>
+    )
+}
+
 export const StoryboardEditPage = () => {
+    const {activeObjectIndex} = useContext(SceneContext);
     return (
         <Box sx={{display: 'flex'}}>
             <Box sx={{height: 'calc(100vh - 60px)', flex: 1, display: 'flex'}}>
@@ -72,7 +134,7 @@ export const StoryboardEditPage = () => {
                     </Paper>
                 </Box>
                 <Divider orientation="vertical" flexItem/>
-                <Assets />
+                {activeObjectIndex === undefined ?  <Assets /> : <Inspector/>}
             </Box>
         </Box>
     )

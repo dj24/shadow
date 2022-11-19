@@ -1,10 +1,7 @@
-import * as THREE from "three"
 import React, {Suspense, useContext, useEffect, useState} from "react"
-import {Canvas, useFrame, useThree} from "@react-three/fiber"
+import {Canvas, useThree} from "@react-three/fiber"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import {Backdrop, Environment, PivotControls} from "@react-three/drei";
-import Stacy from "./components/Stacy"
-import {Box} from "./components/Box";
+import { Environment, PivotControls} from "@react-three/drei";
 import {SceneContext} from "./App";
 
 const CameraController = () => {
@@ -12,7 +9,6 @@ const CameraController = () => {
   useEffect(
       () => {
         const controls = new OrbitControls(camera, gl.domElement);
-
         controls.minDistance = 3;
         controls.maxDistance = 20;
         return () => {
@@ -26,18 +22,9 @@ const CameraController = () => {
 
 export default function SceneView() {
     const [isDragging, setDragging] = useState(false);
-    const [activeObjectIndex, setActiveObjectIndex] = useState();
-    const {sceneObjects} = useContext(SceneContext);
 
-    useEffect(() => {
-       window.addEventListener('keypress', function(e){
-           e.preventDefault();
-           console.log(e.key);
-            if(e.key == 'Escape'){
-               console.log('esc')
-            }
-        });
-    },[])
+    const {sceneObjects, setActiveObjectIndex, activeObjectIndex} = useContext(SceneContext);
+
     return (
         <Canvas shadows onPointerMissed={() => setActiveObjectIndex(undefined)}>
         {!isDragging && <CameraController />}

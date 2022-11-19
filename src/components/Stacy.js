@@ -10,7 +10,7 @@ export default function Stacy(props) {
   const { ref  } = useAnimations(animations)
 
   return (
-    <group ref={ref} {...props} dispose={null}>
+    // <group ref={ref} {...props} dispose={null}>
       <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
         <primitive object={nodes.mixamorigHips} />
         <skinnedMesh
@@ -24,6 +24,6 @@ export default function Stacy(props) {
           <meshStandardMaterial map={texture} map-flipY={false} skinning />
         </skinnedMesh>
       </group>
-    </group>
+    // </group>
   )
 }

@@ -11,13 +11,13 @@ export const SceneContext = React.createContext({});
 
 export const App = () => {
     const [sceneObjects, setSceneObjects] = useState([]);
+    const [activeObjectIndex, setActiveObjectIndex] = useState();
     return (
-        <SceneContext.Provider value={{sceneObjects, setSceneObjects}}>
+        <SceneContext.Provider value={{sceneObjects, setSceneObjects, activeObjectIndex, setActiveObjectIndex}}>
             <Box>
                 <Paper square sx={{minHeight: '100vh'}}>
                     <Router basename='/shadow'>
                         <Navbar/>
-                        {/*<Divider />*/}
                         <Route exact path="/">
                             <Home/>
                         </Route>
