@@ -20,7 +20,6 @@ export const App = () => {
         const { x,y,z} = activeObjectPosition;
         activeObjectMatrix.makeTranslation(x,y,z);
     },[activeObjectPosition])
-    console.log({activeObjectMatrix})
     return (
         <SceneContext.Provider value={value}>
             <Box>

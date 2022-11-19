@@ -27,7 +27,7 @@ export default function SceneView() {
     const {sceneObjects, setActiveObjectIndex, activeObjectIndex, setActiveObjectMatrix, activeObjectMatrix, setActiveObjectPosition} = useContext(SceneContext);
 
     return (
-        <Canvas shadows onPointerMissed={() => setActiveObjectIndex(undefined)}>
+        <Canvas onPointerMissed={() => setActiveObjectIndex(undefined)}>
         {!isDragging && <CameraController />}
           <ambientLight />
           <directionalLight position={[-5, 5, 5]} castShadow shadow-mapSize-width={1024} shadow-mapSize-height={1024} />

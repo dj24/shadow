@@ -2,12 +2,13 @@ import {Box, Paper, Typography} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {Link} from "react-router-dom";
 
-const StoryPreview = () => (
+const StoryPreview = ({i}) => (
     <Paper
         sx={{
         width: '33%',
         aspectRatio: '16/9',
-        backgroundColor: 'grey.800', flexShrink: 0}}>
+        backgroundColor: 'grey.800', flexShrink: 0, display: 'flex', overflow: 'hidden'}}>
+        <img style={{width: '100%', objectFit: 'cover'}} src={`${process.env.PUBLIC_URL}/images/project${i}.png`}/>
     </Paper>
 )
 
@@ -57,7 +58,7 @@ export const Home = () => (
         <Box sx={{display: 'flex', gap: 3, flexDirection: 'column'}}>
             <Heading>Recent Projects</Heading>
             <Box sx={{display: 'flex', gap: 8}}>
-                {[0,1,2].map(i => <StoryPreview key={i}/>)}
+                {[1,2,3].map(i => <StoryPreview i={i} key={i}/>)}
             </Box>
         </Box>
         <Box sx={{display: 'flex', gap: 3, flexDirection: 'column'}}>

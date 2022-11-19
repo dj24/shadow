@@ -1,5 +1,4 @@
-import {Box, Paper, Typography} from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import {Paper} from "@mui/material";
 import {Link} from "react-router-dom";
 
 export const Navbar = () => (
@@ -7,6 +6,6 @@ export const Navbar = () => (
         <Link style={{height: '100%', display: 'flex'}} to={'/'}>
             <img src={`${process.env.PUBLIC_URL}/images/logo.png`} />
         </Link>
-        <AccountCircleIcon/>
+        <img style={{borderRadius: '9999px', height: 40, aspectRatio: '1/1'}} src={`${process.env.PUBLIC_URL}/images/profile.jpeg`} />
     </Paper>
 )
