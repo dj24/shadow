@@ -1,18 +1,25 @@
-import {Button, Divider, Paper} from "@mui/material";
+import {Button, Divider, Paper, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import {useContext} from "react";
+import {RightPanelContext} from "../App";
 
 export const ExtraControls = () => {
+    const { setIsCommentsVisible, isCommentsVisible } = useContext(RightPanelContext);
     return (
-        <Paper sx={{border: 1, borderColor: 'divider'}}>
-            <Button sx={{py: 2}} square>
+        <ToggleButtonGroup
+            value={isCommentsVisible ? 'comments' : 'assets'}
+            orientation="vertical"
+            exclusive
+            onChange={(_,name) => setIsCommentsVisible(name === 'comments')}
+            aria-label="text alignment"
+        >
+            <ToggleButton value="comments" aria-label="left aligned">
                 <QuestionAnswerIcon />
-            </Button>
-
-            <Divider/>
-            <Button sx={{py: 2}} square>
+            </ToggleButton>
+            <ToggleButton value="assets" aria-label="centered">
                 <ManageSearchIcon />
-            </Button>
-        </Paper>
+            </ToggleButton>
+        </ToggleButtonGroup>
     )
 }

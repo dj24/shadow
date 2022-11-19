@@ -9,7 +9,7 @@ import {
 import Select  from '@mui/material/Select';
 import {Toolbar} from "../components/Toolbar";
 import {useContext} from "react";
-import {SceneContext} from "../App";
+import {RightPanelContext, SceneContext} from "../App";
 import { Box as BoxModel} from '../components/Box';
 import Stacy from "../components/Stacy";
 import Sofa from "../components/Sofa";
@@ -17,6 +17,7 @@ import Table from "../components/Table";
 import {Wall} from "../components/Wall";
 import { ExtraControls} from "../components/ExtraControls";
 import {Inspector} from "../components/Inspector";
+import {Comments} from "../components/Coments";
 
 
 const Assets = () => {
@@ -64,6 +65,15 @@ const Assets = () => {
 
 export const StoryboardEditPage = () => {
     const {activeObjectIndex} = useContext(SceneContext);
+    const { isCommentsVisible } = useContext(RightPanelContext);
+    let RightPanel = Assets;
+
+    if(activeObjectIndex !== undefined){
+        RightPanel = Inspector;
+    }
+    if(isCommentsVisible){
+        RightPanel = Comments;
+    }
     return (
         <Box sx={{display: 'flex'}}>
             <Box sx={{height: 'calc(100vh - 60px)', flex: 1, display: 'flex'}}>
@@ -89,7 +99,7 @@ export const StoryboardEditPage = () => {
                     </Paper>
                 </Box>
                 <Divider orientation="vertical" flexItem/>
-                {activeObjectIndex === undefined ?  <Assets /> : <Inspector/>}
+                <RightPanel/>
             </Box>
         </Box>
     )
