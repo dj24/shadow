@@ -1,6 +1,6 @@
 import Canvas from "../SceneView";
 import {
-    Box,
+    Box, Dialog, DialogTitle,
     Divider, FormControl,
     InputLabel,
     MenuItem, Paper, Slider, TextField, Tooltip,
@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import Select  from '@mui/material/Select';
 import {Toolbar} from "../components/Toolbar";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {RightPanelContext, SceneContext} from "../App";
 import { Box as BoxModel} from '../components/Box';
 import Stacy from "../components/Stacy";
@@ -67,25 +67,11 @@ const Assets = () => {
 }
 
 
-
-const References = () => {
-    return(
-        <Paper sx={{ flex:'1', display: 'flex', gap:2, p: 2, border: 1, borderColor: 'divider'}}>
-            {[1,2,3].map(i => (
-                <img  style={{borderRadius:4, objectFit: 'cover', aspectRatio: '1/1', width: 90}} src={`${process.env.PUBLIC_URL}/images/inspo${i}.jpeg`}/>
-            ))}
-            <Paper sx={{ backgroundColor: 'grey.800', aspectRatio: '1/1', width: 90, display: 'flex', alignItems:'center', justifyContent: 'center'}}>
-                <AddIcon color="grey.900"/>
-            </Paper>
-        </Paper>
-    )
-}
-
-
-
 export const StoryboardEditPage = () => {
     const {activeObjectIndex} = useContext(SceneContext);
     const { isCommentsVisible } = useContext(RightPanelContext);
+    const [selectedReference, setSelectedReference] = useState(null);
+
     let RightPanel = Assets;
 
     if(activeObjectIndex !== undefined){
@@ -105,14 +91,11 @@ export const StoryboardEditPage = () => {
                             <ExtraControls/>
                             <Paper sx={{aspectRatio: '16/9', flex:1, overflow:'hidden', position:'relative'}}>
                                 <Canvas/>
-                                <FormControl sx={{position: 'absolute', bottom: 16, left: 16, width: 160}}>
-                                    <InputLabel id="label-aspect">Aspect Ratio</InputLabel>
-                                    <Select defaultValue={0} label="Category">
-                                        <MenuItem value={0}>1.85:1</MenuItem>
-                                        <MenuItem value={1}>2.39:1</MenuItem>
-                                        <MenuItem value={2}>1.3:1</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                <Select defaultValue={0} sx={{backdropFilter: 'blur(16px)', background: 'rgba(0,0,0,0.125)', position: 'absolute', bottom: 16, left: 16, width: 160}}>
+                                    <MenuItem value={0}>1.85:1</MenuItem>
+                                    <MenuItem value={1}>2.39:1</MenuItem>
+                                    <MenuItem value={2}>1.3:1</MenuItem>
+                                </Select>
                             </Paper>
                         </Box>
 
@@ -132,7 +115,17 @@ export const StoryboardEditPage = () => {
                                 <Typography sx={{mb: 1.5}}>
                                     References
                                 </Typography>
-                                <References/>
+                                <Paper sx={{ flex:'1', display: 'flex', gap:2, p: 2, border: 1, borderColor: 'divider'}}>
+                                    {[1,2,3].map(i => {
+                                        const src = `${process.env.PUBLIC_URL}/images/inspo${i}.jpeg`;
+                                        return(
+                                            <img onClick={() => setSelectedReference(src)} style={{borderRadius:4, objectFit: 'cover', aspectRatio: '1/1', width: 90}} src={src}/>
+                                        );
+                                    })}
+                                    <Paper sx={{ backgroundColor: 'grey.800', aspectRatio: '1/1', width: 90, display: 'flex', alignItems:'center', justifyContent: 'center'}}>
+                                        <AddIcon color="grey.900"/>
+                                    </Paper>
+                                </Paper>
                             </FormControl>
 
                         </Box>
@@ -141,6 +134,13 @@ export const StoryboardEditPage = () => {
                 <Divider orientation="vertical" flexItem/>
                 <RightPanel/>
             </Box>
+            <Dialog
+                open={selectedReference !== null}
+                onClose={() => setSelectedReference(null)}
+            >
+                <DialogTitle>Reference</DialogTitle>
+                <img style={{minWidth: 720}} src={selectedReference}/>
+            </Dialog>
         </Box>
     )
 }
