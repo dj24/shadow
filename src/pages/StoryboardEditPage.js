@@ -14,6 +14,7 @@ import { Box as BoxModel} from '../components/Box';
 import Stacy from "../components/Stacy";
 import Sofa from "../components/Sofa";
 import Table from "../components/Table";
+import {Wall} from "../components/Wall";
 
 function ValueLabelComponent(props) {
     const { children, value } = props;
@@ -55,6 +56,8 @@ const Assets = () => {
                 <img onClick={handleThumbClick(BoxModel)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/cube_thumb.png`}/>
                 <img onClick={handleThumbClick(Sofa)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/sofa_thumb.png`}/>
                 <img onClick={handleThumbClick(Table)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/table_thumb.png`}/>
+                <img onClick={handleThumbClick(Wall)} style={{objectFit: 'cover', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%'}} src={`${process.env.PUBLIC_URL}/images/wall_thumb.png`}/>
+
 
                 {[0,1,2,3,4,5,6,7,8].map(i => (
                     <Paper key={{i}} sx={{ aspectRatio: '1/1', backgroundColor: 'grey.800'}}/>
@@ -82,7 +85,7 @@ const Inspector = () => {
                     {['X', 'Y', 'Z'].map(axis => (
                         <FormControl>
                             <Typography gutterBottom>
-                                {axis} Rotation
+                                {axis} Position
                             </Typography>
                             <Slider valueLabelDisplay="auto" slots={{
                                 valueLabel: ValueLabelComponent,
