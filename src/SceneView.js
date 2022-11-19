@@ -3,6 +3,7 @@ import {Canvas, useThree} from "@react-three/fiber"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Environment, PivotControls} from "@react-three/drei";
 import {SceneContext} from "./App";
+import * as THREE from 'three';
 
 const CameraController = () => {
   const { camera, gl } = useThree();
@@ -23,7 +24,7 @@ const CameraController = () => {
 export default function SceneView() {
     const [isDragging, setDragging] = useState(false);
 
-    const {sceneObjects, setActiveObjectIndex, activeObjectIndex} = useContext(SceneContext);
+    const {sceneObjects, setActiveObjectIndex, activeObjectIndex, setActiveObjectMatrix, activeObjectMatrix, setActiveObjectPosition} = useContext(SceneContext);
 
     return (
         <Canvas shadows onPointerMissed={() => setActiveObjectIndex(undefined)}>
@@ -33,14 +34,22 @@ export default function SceneView() {
             <Suspense fallback={null}>
             {sceneObjects.map((Model, i) => {
                 const isActive = activeObjectIndex === i;
+                const activeObjectPosition = new THREE.Vector3();
+                activeObjectPosition.setFromMatrixPosition(activeObjectMatrix);
+
                 const props =  {
                     onDragStart: () => setDragging(true),
-                    onDrag: (matrix) => console.log('drag', {matrix}),
+                    onDrag: (l, dl, w, dw) => {
+                        const vec = new THREE.Vector3();
+                        vec.setFromMatrixPosition(w);
+                        setActiveObjectPosition(vec);
+                    },
                     onDragEnd: () => setDragging(false),
                     depthTest: false,
                     anchor:[0, -1, 0],
                     scale: 0.75,
                     visible: isActive,
+                    // offset: isActive ? [activeObjectPosition.x, activeObjectPosition.y, activeObjectPosition.z] : undefined
                 };
                 return (
                     <PivotControls

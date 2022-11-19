@@ -11,6 +11,20 @@ const StoryPreview = () => (
     </Paper>
 )
 
+const TutorialPreview = ({i}) => (
+    <Paper
+        sx={{
+            width: '33%',
+            aspectRatio: '16/9',
+            backgroundColor: 'grey.800', flexShrink: 0,
+            overflow: 'hidden',
+            display: 'flex',
+    }}
+    >
+        <img src={`${process.env.PUBLIC_URL}/images/tutorial${i}.jpg`}/>
+    </Paper>
+)
+
 const CreateNewStory = () => (
     <Link to={'/create'}>
         <Paper
@@ -49,7 +63,7 @@ export const Home = () => (
         <Box sx={{display: 'flex', gap: 3, flexDirection: 'column'}}>
             <Heading>Tutorials</Heading>
             <Box sx={{display: 'flex', gap: 8}}>
-                {[0,1,2].map(i => <StoryPreview key={i}/>)}
+                {[1,2,3].map(i => <TutorialPreview i={i} key={i}/>)}
             </Box>
         </Box>
     </Box>
