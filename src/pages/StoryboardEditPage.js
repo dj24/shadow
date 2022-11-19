@@ -18,6 +18,7 @@ import {Wall} from "../components/Wall";
 import { ExtraControls} from "../components/ExtraControls";
 import {Inspector} from "../components/Inspector";
 import {Comments} from "../components/Coments";
+import AddIcon from "@mui/icons-material/Add";
 
 
 const Assets = () => {
@@ -63,6 +64,21 @@ const Assets = () => {
 
 
 
+const References = () => {
+    return(
+        <Paper sx={{ flex:'1', display: 'flex', gap:2, p: 2}}>
+            {[1,2,3].map(i => (
+                <img  style={{borderRadius:4, objectFit: 'cover', aspectRatio: '1/1', width: 96}} src={`${process.env.PUBLIC_URL}/images/inspo${i}.jpeg`}/>
+            ))}
+            <Paper sx={{ backgroundColor: 'grey.800', aspectRatio: '1/1', width: 96, display: 'flex', alignItems:'center', justifyContent: 'center'}}>
+                <AddIcon color="grey.900"/>
+            </Paper>
+        </Paper>
+    )
+}
+
+
+
 export const StoryboardEditPage = () => {
     const {activeObjectIndex} = useContext(SceneContext);
     const { isCommentsVisible } = useContext(RightPanelContext);
@@ -88,14 +104,17 @@ export const StoryboardEditPage = () => {
                             </Paper>
                         </Box>
 
-                        <TextField
-                            sx={{alignSelf: 'stretch'}}
-                            label="Notes"
-                            multiline
-                            rows={4}
-                            defaultValue="Example Notes"
-                            variant="outlined"
-                        />
+                        <Box sx={{display: 'flex', gap:3, alignSelf: 'stretch', marginLeft: 9}}>
+                            <TextField
+                                sx={{ flex:'1'}}
+                                label="Notes"
+                                multiline
+                                rows={4}
+                                defaultValue="Example Notes"
+                                variant="outlined"
+                            />
+                            <References/>
+                        </Box>
                     </Paper>
                 </Box>
                 <Divider orientation="vertical" flexItem/>
