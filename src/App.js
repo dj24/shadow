@@ -9,39 +9,43 @@ import React, {useEffect, useState} from "react";
 import * as THREE from "three";
 
 export const SceneContext = React.createContext({});
+export const RightPanelContext = React.createContext({});
 
 export const App = () => {
     const [sceneObjects, setSceneObjects] = useState([]);
     const [activeObjectIndex, setActiveObjectIndex] = useState();
     const [activeObjectMatrix, setActiveObjectMatrix] = useState(new THREE.Matrix4());
     const [activeObjectPosition, setActiveObjectPosition] = useState(new THREE.Vector3());
+    const [isCommentsVisible, setIsCommentsVisible] = useState(false);
     const value = {activeObjectPosition, setActiveObjectPosition, sceneObjects, setSceneObjects, activeObjectIndex, setActiveObjectIndex, activeObjectMatrix, setActiveObjectMatrix};
     useEffect(() => {
         const { x,y,z} = activeObjectPosition;
         activeObjectMatrix.makeTranslation(x,y,z);
     },[activeObjectPosition])
     return (
-        <SceneContext.Provider value={value}>
-            <Box>
-                <Paper square sx={{minHeight: '100vh'}}>
-                    <Router basename='/shadow'>
-                        <Navbar/>
-                        <Route exact path="/">
-                            <Home/>
-                        </Route>
-                        <Route exact path="/create">
-                            <Home/>
-                            <CreateModal/>
-                        </Route>
-                        <Route exact path="/storyboard">
-                            <StoryboardOverview />
-                        </Route>
-                        <Route exact path="/edit/:id">
-                            <StoryboardEditPage />
-                        </Route>
-                    </Router>
-                </Paper>
-            </Box>
-        </SceneContext.Provider>
+        <RightPanelContext.Provider value={{isCommentsVisible, setIsCommentsVisible}}>
+            <SceneContext.Provider value={value}>
+                <Box>
+                    <Paper square sx={{minHeight: '100vh'}}>
+                        <Router basename='/shadow'>
+                            <Navbar/>
+                            <Route exact path="/">
+                                <Home/>
+                            </Route>
+                            <Route exact path="/create">
+                                <Home/>
+                                <CreateModal/>
+                            </Route>
+                            <Route exact path="/storyboard">
+                                <StoryboardOverview />
+                            </Route>
+                            <Route exact path="/edit/:id">
+                                <StoryboardEditPage />
+                            </Route>
+                        </Router>
+                    </Paper>
+                </Box>
+            </SceneContext.Provider>
+        </RightPanelContext.Provider>
     )
 }

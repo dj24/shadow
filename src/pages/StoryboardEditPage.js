@@ -16,6 +16,7 @@ import Sofa from "../components/Sofa";
 import Table from "../components/Table";
 import {Wall} from "../components/Wall";
 import { ExtraControls} from "../components/ExtraControls";
+import {Inspector} from "../components/Inspector";
 
 
 const Assets = () => {
@@ -72,7 +73,7 @@ export const StoryboardEditPage = () => {
                     <Paper square elevation={0} sx={{display: 'flex', alignItems: 'center', height: 'calc(100vh - 121px)', flexDirection: 'column', gap: 3, p: 3 }}>
                         <Box sx={{flex:1, display: 'flex', justifyContent: 'space-between', gap: 3, alignSelf: 'stretch', alignItems: 'start'}}>
                             <ExtraControls/>
-                            <Paper sx={{aspectRatio: '16/9', flex:1}}>
+                            <Paper sx={{aspectRatio: '16/9', flex:1, overflow:'hidden'}}>
                                 <Canvas/>
                             </Paper>
                         </Box>
